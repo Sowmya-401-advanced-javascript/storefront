@@ -1,46 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
-import initialState from '../store/products';
+import { selectCategory, reset } from '../store/products-reducer';
 
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 345,
+    },
+    media: {
+        height: 140,
+    },
+});
 
-const ProductComp = () => {
+const mapDispatchToProps = { selectCategory, reset };
 
-    const { products } = initialState;
+function Products(props) {
+    console.log('Props on Products: ', 'Active Category ', props.activeCategory, 'Products: ', props.products);
 
-    const [currentCategory, setCurrentCategory] = useState([]);
-
-    const renderProducts = (e) => {
-        let tempArray = [];
-        const name = e.target.name;
-        if(name === 'Electronics'){
-            products.forEach(product => {
-                // console.log("Product", product);
-                if(product.Category === "Electronics"){
-                    tempArray.push(product.itemName, product.Description, product.Price, product.itemCount)
-                }
-            })
-        }
-        if(name === 'Food'){
-            products.forEach(product => {
-                // console.log("Product", product);
-                if(product.Category === "Food"){
-                    tempArray.push(product.itemName, product.Description, product.Price, product.itemCount)
-                }
-            })
-        }
-        setCurrentCategory(tempArray);
-    }
+    const classes = useStyles();
 
     return (
-        <div>
-            <button name="Electronics" onClick={renderProducts}>Electronics</button>
-            <button name="Food" onClick={renderProducts}>Food</button>
-
-            <h2>Browse Our Categories</h2>
-            {currentCategory}
-                
-        </div >
+        <div id="productDetail">
+            {props.products.map((product) => (
+                (product.category !== props.activeCategory) ? '' :
+                    <CardActionArea>
+                        <CardContent>
+                            <Typography variant="h5" component="h2">
+                                {product.itemName}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {product.Description}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                Only ${product.Price}!
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button size="small" color="primary">
+                                Add to Cart
+                            </Button>
+                            <Button size="small" color="primary">
+                                Buy!
+                            </Button>
+                        </CardActions>
+                    </CardActionArea>
+            ))}
+        </div>
     )
 }
 
-export default ProductComp;
+const mapStateToProps = state => ({
+    state, 
+    activeCategory: state.products.activeCategory,
+    products: state.products.products
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
