@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductComp from './ProductComponents';
+import Products from './ProductComponents';
 import { connect } from 'react-redux';
 import { selectCategory, reset } from '../store/products-reducer';
 import { Typography } from '@material-ui/core';
@@ -17,7 +17,7 @@ function Categories(props) {
         props.rest();
     }
 
-    console.log('CATEGORIES Active: ', props.active, 'Categories: ', props.categories);
+    console.log('CATEGORIES Active: ', props.active, 'Categories: ', props.products);
 
 
     return (
@@ -32,11 +32,11 @@ function Categories(props) {
                 }
                 {(props.active === 'Food' || props.active === '') ?
                     <div>
-                        <Typography variant='h6' id='Food' onClick={() => showCategory('Food')}>Food></Typography>
+                        <Typography variant='h6' id='Food' onClick={() => showCategory('Food')}>Food</Typography>
                     </div> : ''
                 }
             </section>
-            <section id="products">
+            <section id="Products">
                 <Products />
 
             </section>
@@ -45,8 +45,8 @@ function Categories(props) {
 }
 
 const mapStateToProps = state => ({
-    categories: state.categories.categories,
-    active: state.categories.activeCategory
+    categories: state.products.Categories,
+    active: state.products.activeCategory
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
