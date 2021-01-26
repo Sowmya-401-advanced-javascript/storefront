@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import initialState from '../store/products';
+import { selectCategory, reset } from '../store/products-reducer';
 
 
 const ProductComp = () => {

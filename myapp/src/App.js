@@ -9,17 +9,11 @@ import { Container } from '@material-ui/core';
 
 function App() {
   return (
-    <>
-      <Header></Header>
-      <main>
-        <Container>
-
-        </Container>
-        <ProductComp></ProductComp>
-        <Categories></Categories>
-      </main>
-      <Footer></Footer>
-    </>
+    <div>
+      <Header />
+      <Categories />
+      <Footer />
+    </div>
   );
 }
 
