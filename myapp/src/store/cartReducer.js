@@ -10,6 +10,8 @@ let initialState = {
       payload: product
     }
   }
+
+//   TODO: Change Quantity
   
   export const removeItem = (product) =>{
     // console.log('CART REDUCER removeItem: ', product);
@@ -29,11 +31,11 @@ let initialState = {
     let { type, payload } = action;
     switch (type) {
       case 'ADDITEM':
-        // console.log('ADDING ITEM TO CART in CART REDUCER SWITCHBOARD');
+        // console.log('Payload in cart-reducer', payload);
         return {...state, cart: [...state.cart, payload], cartCount: state.cartCount + 1};
         
         case 'REMOVE':
-          // console.log('REMOVING ITEM IN CART in CART REDUCER SWITCHBOARD');
+          // console.log('REMOVING ITEM IN CART in CART REDUCER BOARD');
           
         // Remove from the state
           let tempArray = state.cart; 
