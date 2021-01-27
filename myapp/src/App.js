@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Categories from './components/categories';
-
+import Products from './components/ProductComponents';
 
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
     <div>
       <Header />
       <Categories />
+      <Products />
       <Footer />
     </div>
   );

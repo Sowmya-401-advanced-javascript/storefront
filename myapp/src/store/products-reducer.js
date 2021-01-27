@@ -1,77 +1,17 @@
-const initialState = {
+let initialState = {
+    categories: [
+      { itemName: 'electronics', displayName: 'Elecronics' },
+      { itemName: 'food', displayName: 'Food' },
+      { itemName: 'clothing', displayName: 'Clothing' },
+    ],
     products: [
-        {
-            _id: '1',
-            itemName: 'Samsung TV',
-            Description: 'Samsung TV 75inch',
-            Price: '400',
-            Category: 'Electronics',
-            itemCount: 0
-        },
-
-        {
-            _id: '2',
-            itemName: 'Oneplus',
-            Description: 'Oneplus7t',
-            Price: '600',
-            Category: 'Electronics',
-            itemCount: 0
-        },
-
-        {
-            _id: '3',
-            itemName: 'Amazon Echo Show',
-            Description: 'AmazonEcho Show 15inch',
-            Price: '200',
-            Category: 'Electronics',
-            itemCount: 0
-        },
-
-        {
-            _id: '4',
-            itemName: 'Mac',
-            Description: 'Apple',
-            Price: '1000',
-            Category: 'Electronics',
-            itemCount: 0
-        },
-
-        {
-            _id: '5',
-            itemName: 'Hot Chocolate',
-            Description: 'Add on Ice-Cream',
-            Price: '15',
-            Category: 'Food',
-            itemCount: 0
-        },
-
-        {
-            _id: '6',
-            itemName: 'Chocolate Fudge',
-            Description: 'Eat with Ice-Cream',
-            Price: '20',
-            Category: 'Food',
-            itemCount: 0
-        },
-
-        {
-            _id: '7',
-            itemName: 'Choco Chips',
-            Description: 'Toppings on Ice-cream',
-            Price: '10',
-            Category: 'Food',
-            itemCount: 0
-        },
-
-        {
-            _id: '8',
-            itemName: 'Chocolate Syrup',
-            Description: 'Add in Milkshakes and Ice-Cream',
-            Price: '20',
-            Category: 'Food',
-            itemCount: 0
-        }
-
+      { itemName: 'TV', Category: 'Electronics', Price: 699.00, inStock: 5 },
+      { itemName: 'Radio', Category: 'Electronics', Price: 99.00, inStock: 15 },
+      { itemName: 'Shirt', Category: 'Clothing', Price: 9.00, inStock: 25 },
+      { itemName: 'Socks', Category: 'Clothing', Price: 12.00, inStock: 10 },
+      { itemName: 'Apples', Category: 'Food', Price: .99, inStock: 500 },
+      { itemName: 'Eggs', Category: 'Food', Price: 1.99, inStock: 12 },
+      { itemName: 'Bread', Category: 'Food', Price: 2.39, inStock: 90 },
     ],
     activeCategory: ''
 };
@@ -83,6 +23,13 @@ export const selectCategory = (category) => {
     }
 }
 
+// export const updateProducts = (category) => {
+//     return {
+//         type: 'UPDATEPRODUCTS',
+//         payload: category
+//     }
+// }
+
 export const reset = () => {
     return {
         type: 'RESET'
@@ -93,15 +40,26 @@ const categoryReducer = (state=initialState, action) => {
     let { type, payload } = action;
     switch(type) {
         case 'SELECTCATEGORY':
+            console.log('Type_________', type);
             console.log('CATEGORY REDUCER', initialState);
-
+            console.log('Payload', payload);
             return{...state, activeCategory: payload};
 
-            case 'RESET':
-                return initialState;
+        case 'UPDATEPRODUCTS':
+            let updatedProducts = state.products.map(product => {
+                if(product.category === payload){
+                    
+                    return{...state.updatedProducts, activeCategory: payload};       //return product         
+                    
+                }
+            });
+            //return updated products ...state, state.updatedProducts
 
-                default:
-                    return state;
+        case 'RESET':
+            return initialState;
+
+        default:
+            return state;
     }
 }
 
