@@ -23,6 +23,12 @@ export const selectCategory = (category) => {
     }
 }
 
+export const updateProducts = (category) => {
+    return {
+        type: 'UPDATEPRODUCTS',
+        payload: category
+    }
+}
 export const incrementStock = (product) => {
     // console.log('CATEGORY REDUCER incrementStock ', product);
     return {
@@ -59,6 +65,12 @@ const categoryReducer = (state = initialState, action) => {
             console.log('Type_________', type);
             console.log('CATEGORY REDUCER', initialState);
             console.log('Payload', payload);
+            return{...state, activeCategory: payload};
+
+        case 'UPDATEPRODUCTS':
+            // let filteredProducts = state.products.filter(product => product.category === payload )
+            // return {...state, products: filteredProducts}
+            return {...state, activeCategory: payload}
             return { ...state, activeCategory: payload };
 
         case 'INCREMENTSTOCK':

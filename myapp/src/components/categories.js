@@ -1,17 +1,17 @@
 import React from 'react';
 import Products from './ProductComponents';
 import { connect } from 'react-redux';
-import { selectCategory, /*updateProducts,*/ reset } from '../store/products-reducer';
+import { selectCategory, updateProducts, reset } from '../store/products-reducer';
 import { Typography } from '@material-ui/core';
 
-const mapDispatchToProps = { selectCategory, /*updateProducts,*/ reset };
+const mapDispatchToProps = { selectCategory, updateProducts, reset };
 
 function Categories(props) {
 
     const showCategory = (category) => {
         console.log('Show Category', category);
         props.selectCategory(category);
-        // props.updateProducts(category);
+        props.updateProducts(category);
     }
 
     const reset = () => {
