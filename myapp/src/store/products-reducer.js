@@ -23,12 +23,12 @@ export const selectCategory = (category) => {
     }
 }
 
-// export const updateProducts = (category) => {
-//     return {
-//         type: 'UPDATEPRODUCTS',
-//         payload: category
-//     }
-// }
+export const updateProducts = (category) => {
+    return {
+        type: 'UPDATEPRODUCTS',
+        payload: category
+    }
+}
 
 export const reset = () => {
     return {
@@ -46,14 +46,9 @@ const categoryReducer = (state=initialState, action) => {
             return{...state, activeCategory: payload};
 
         case 'UPDATEPRODUCTS':
-            let updatedProducts = state.products.map(product => {
-                if(product.category === payload){
-                    
-                    return{...state.updatedProducts, activeCategory: payload};       //return product         
-                    
-                }
-            });
-            //return updated products ...state, state.updatedProducts
+            // let filteredProducts = state.products.filter(product => product.category === payload )
+            // return {...state, products: filteredProducts}
+            return {...state, activeCategory: payload}
 
         case 'RESET':
             return initialState;
